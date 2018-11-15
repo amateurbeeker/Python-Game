@@ -1,0 +1,33 @@
+import pygame
+import os
+
+# import the image for your player here
+# make sure it is in your project file (to the left)
+img_path = os.path.join('chewy.png')
+
+class Customer(object):
+
+
+    # the constructor
+    def __init__(self, x, y, name):
+        self.image = pygame.image.load(img_path)
+        self.rect = self.image.get_rect()
+        self.name = name;
+        self.rect.x = x
+        self.rect.y = y
+        self.order = ["broc", "broc", "broc"]
+
+
+    def generate_order(self):
+       pass
+
+    # handles keys
+    def handle_keys(self):
+        key = pygame.key.get_pressed()
+        dist = 5                        # distance moved in 1 frame, try changing it to 5
+        if key[pygame.K_DOWN]:          # down key
+            self.rect.y += dist         # move down
+
+    # to display on game panel
+    def display(self, surface):
+        surface.blit(self.image, self.rect)
