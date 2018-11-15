@@ -1,0 +1,47 @@
+import pygame
+import os
+
+# import the image for your player here
+img_path = os.path.join('yoda.png')
+
+class Player(object):
+
+    # the constructor
+    def __init__(self, x, y, name):
+        self.image = pygame.image.load(img_path)
+        self.rect = self.image.get_rect()
+        self.name = name;
+        self.rect.x = x
+        self.rect.y = y
+
+        self.bag = []
+
+    def touching(self, item):
+        if self.rect.colliderect(item):
+            return True
+
+    def pick_up(self, item):
+        self.bag.append(item.name)
+
+    # tips for getting him to move:
+    #   check IF a specific key is pressed
+    #   change either X or Y, depending on what key was pressed
+    #
+    #   for example: IF the down key is pressed, THEN change the x position by -1
+
+    # handles keys
+    def handle_keys(self):
+        key = pygame.key.get_pressed()
+        dist = 5                        # distance moved in 1 frame, try changing it to 5
+        if key[pygame.K_DOWN]:          # down key
+            self.rect.y += dist         # move down
+        elif key[pygame.K_UP]:         # up key
+            self.rect.y -= dist        # move up
+        if key[pygame.K_RIGHT]:        # right key
+            self.rect.x += dist        # move right
+        elif key[pygame.K_LEFT]:       # left key
+            self.rect.x -= dist        # move left
+
+    # to display on game panel
+    def display(self, surface):
+        surface.blit(self.image, self.rect)
