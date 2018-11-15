@@ -1,0 +1,29 @@
+import pygame
+import os
+
+# import the image for your player here
+
+global items
+
+items = pygame.sprite.Group()
+
+class Item(pygame.sprite.Sprite):
+
+    global hide
+
+    # the constructor
+    def __init__(self, img_name, name, x, y):
+
+        pygame.sprite.Sprite.__init__(self, items)
+
+        self.image = pygame.image.load(os.path.join(img_name))
+        self.rect = self.image.get_rect()
+        self.rect.x = x
+        self.rect.y = y
+        self.name = name;
+        self.hide = False
+
+    # to display on game panel
+    def display(self, surface):
+        if self.hide == False:
+            surface.blit(self.image, self.rect)
